@@ -1,0 +1,17 @@
+{
+    "name": "2un-light/peanutdb",
+    "description": "PHP 기반 경량 데이터베이스 엔진 구현하기",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "2unLight\\Peanutdb\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "차은영",
+            "email": "tomacato404@gmail.com"
+        }
+    ],
+    "require": {}
+}
