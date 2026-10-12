@@ -68,6 +68,46 @@ class BPTree {
         return null;
     }
 
+    //범위 검색
+    public function range(int $start, int $end): array {
+        $results = [];
+
+        if($start > $end) {
+            return $results;
+        }
+
+        $node = $this->root;
+
+        while(!$node->isLeaf) {
+            $i = 0;
+
+            while(
+                $i < count($node->keys) &&
+                $start >= $node->keys[$i]
+            ) {
+                $i++;
+            }
+
+            $node = $node->children[$i];
+        }
+
+        while($node !== null) {
+            foreach($node->keys as $i => $key) {
+                if($key > $end) {
+                    return $results;
+                }
+
+                if($key >= $start) {
+                    $results[$key] = $node->values[$i];
+                }
+            }
+
+            $node = $node->next;
+        }
+
+        return $results;
+    }
+
     //리프 노드를 둘로 분할
     private function splitLeaf(BPTreeNode $node): array {
         //가운데 위치 계산
