@@ -2,8 +2,6 @@
 
 namespace PeanutDB\Index;
 
-use LogicException;
-
 class BPTree {
     //트리 최상위 노드
     private BPTreeNode $root;
@@ -108,31 +106,6 @@ class BPTree {
         return $results;
     }
 
-    //리프 노드를 둘로 분할
-    private function splitLeaf(BPTreeNode $node): array {
-        //가운데 위치 계산
-        $mid = intdiv(count($node->keys), 2);
-
-        //새로운 오른쪽 리프 노드 생성
-        $right = new BPTreeNode(true);
-
-        $right->keys = array_splice($node->keys, $mid);
-        $right->values = array_splice($node->values, $mid);
-
-        //새 오른쪽 노드가 기존 다음 리프를 가리키도록
-        $right->next = $node->next;
-
-        //기존 노드가 새 오른쪽 노드를 가리키도록
-        $node->next = $right;
-
-        //부모 노드에 전달할 구분 키와 새로운 오른쪽 노드 반환
-        return [
-            'key' => $right->keys[0],
-            'right' => $right,
-        ];
-
-    }
-
     //올바른 리프까지 내려가 데이터 삽입, 분할 결과 부모에게 전달
     private function insertRecursive(
         BPTreeNode $node, 
@@ -203,7 +176,33 @@ class BPTree {
         return $this->splitInternal($node);
 
     }
+
     
+    //리프 노드를 둘로 분할
+    private function splitLeaf(BPTreeNode $node): array {
+        //가운데 위치 계산
+        $mid = intdiv(count($node->keys), 2);
+
+        //새로운 오른쪽 리프 노드 생성
+        $right = new BPTreeNode(true);
+
+        $right->keys = array_splice($node->keys, $mid);
+        $right->values = array_splice($node->values, $mid);
+
+        //새 오른쪽 노드가 기존 다음 리프를 가리키도록
+        $right->next = $node->next;
+
+        //기존 노드가 새 오른쪽 노드를 가리키도록
+        $node->next = $right;
+
+        //부모 노드에 전달할 구분 키와 새로운 오른쪽 노드 반환
+        return [
+            'key' => $right->keys[0],
+            'right' => $right,
+        ];
+
+    }
+
     //내부 노드 둘로 분할
     private function splitInternal(BPTreeNode $node): array {
         //가운데 키 위치
@@ -228,4 +227,8 @@ class BPTree {
         ];
 
     }
+
+    
+    
+
 }

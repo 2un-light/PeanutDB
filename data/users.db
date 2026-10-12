@@ -1,4 +1,6 @@
-{"op":"put","key":"user:1","value":"Walnut"}
-{"op":"put","key":"user:2","value":"Almond"}
-{"op":"put","key":"user:1","value":"Pistachio"}
-{"op":"delete","key":"user:2"}
+{"op":"put","key":10,"value":"Walnut"}
+{"op":"put","key":20,"value":"Almond"}
+{"op":"put","key":30,"value":"Pistachio"}
+{"op":"put","key":40,"value":"Cashew"}
+{"op":"put","key":20,"value":"Peanut"}
+{"op":"delete","key":30}
