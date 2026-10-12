@@ -1,0 +1,4 @@
+{"op":"put","key":"user:1","value":"Walnut"}
+{"op":"put","key":"user:2","value":"Almond"}
+{"op":"put","key":"user:1","value":"Pistachio"}
+{"op":"delete","key":"user:2"}

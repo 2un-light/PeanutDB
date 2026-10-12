@@ -4,7 +4,7 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "2unLight\\Peanutdb\\": "src/"
+            "PeanutDB\\": "src/"
         }
     },
     "authors": [
