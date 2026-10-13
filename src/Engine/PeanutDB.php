@@ -21,6 +21,7 @@ class PeanutDB {
 
     }
 
+    //데이터 삽입
     public function put(int $key, string $value): void {
         $offset = $this->storage->append([
             'op' => 'put',
@@ -31,6 +32,7 @@ class PeanutDB {
         $this->index->insert($key, (string) $offset);
     }
 
+    //데이터 검색
     public function get(int $key): ?string {
         $offset = $this->index->search($key);
 
@@ -40,6 +42,7 @@ class PeanutDB {
 
         $record = $this->storage->readAt((int) $offset);
 
+        //삭제된거면 null 반환
         if($record['op'] === 'delete') {
             return null;
         }
@@ -47,6 +50,7 @@ class PeanutDB {
         return $record['value'];
     }
 
+    //데이터 삭제
     public function delete(int $key): void {
         $offset = $this->storage->append([
             'op' => 'delete',
@@ -56,6 +60,7 @@ class PeanutDB {
         $this->index->insert($key, (string) $offset);
     }
 
+    //데이터 범위 검색
     public function range(int $start, int $end): array {
         $results = [];
 
